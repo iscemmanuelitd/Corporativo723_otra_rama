@@ -68,7 +68,7 @@
           map,
         });
         map.addListener("click", (e) => {
-          geocode({ location: e.latLng });
+          console.log({ location: e.latLng });
         });
         submitButton.addEventListener("click", () =>
           geocode({ address: inputText.value })
