@@ -1,0 +1,5 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/279c33f8-119a-4688-b5f1-86f51b363908/resourceGroups/SistemaPrestamos/providers/Microsoft.Web/sites/corporativo723",
+    "appService.deploySubpath": ".",
+    "cmake.configureOnOpen": true
+}
