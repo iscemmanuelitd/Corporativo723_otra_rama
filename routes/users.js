@@ -24,10 +24,11 @@ router.get('/consultar',async function(req,res,next){
 })
 
 router.post('/autenticar',async function(req,res,next){
-    console.log(req.body)
-    let usu = await web.autenticar(req.body)
+   let _d = ["post","findOne","db723","usuarios",req.body]
+    let usu = await web.autenticar(_d)
     console.log(usu)
-    if (usu.length > 0)
+    if (usu.length > 0 or usu=="error")
+
       res.send({estatus:true,mensaje:`${usu[0].nombre} ${usu[0].paterno} ${usu[0].materno}`,datos:usu[0]})
     else
       res.send({estatus:false,mensaje:"El usuario o la contraseña son incorrectos"})
