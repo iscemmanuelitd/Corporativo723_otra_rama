@@ -26,6 +26,7 @@ router.get('/consultar',async function(req,res,next){
 router.post('/autenticar',async function(req,res,next){
     console.log(req.body)
     let usu = await mongo.autenticar(req.body)
+    console.log(usu)
     if (usu.length > 0)
       res.send({estatus:true,mensaje:`${usu[0].nombre} ${usu[0].paterno} ${usu[0].materno}`,datos:usu[0]})
     else
