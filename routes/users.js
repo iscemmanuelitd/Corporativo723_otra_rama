@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const mongo =  require('../BD')
+const web =  require('../BD')
 
 
 
@@ -19,13 +19,13 @@ router.post('/nuevo', async function(req, res, next) {
 });
    
 router.get('/consultar',async function(req,res,next){
-  let datos = await mongo.consultar("usuarios")
+  let datos = await web.consultar("usuarios")
   res.json(datos)
 })
 
 router.post('/autenticar',async function(req,res,next){
     console.log(req.body)
-    let usu = await mongo.autenticar(req.body)
+    let usu = await web.autenticar(req.body)
     console.log(usu)
     if (usu.length > 0)
       res.send({estatus:true,mensaje:`${usu[0].nombre} ${usu[0].paterno} ${usu[0].materno}`,datos:usu[0]})
