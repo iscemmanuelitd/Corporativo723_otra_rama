@@ -38,6 +38,7 @@ body{
 }
 
 
+
 .card {
   width: var(--card-width);
   height: var(--card-height);
@@ -150,4 +151,9 @@ body{
 
 .inputsCli{
   display: block;
+}
+.map{
+  position:absolute;
+  width:100%;
+  height:100%;
 }
