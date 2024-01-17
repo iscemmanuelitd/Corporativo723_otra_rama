@@ -27,9 +27,8 @@ router.post('/autenticar',async function(req,res,next){
    let _d = ["post","findOne","db723","usuarios",req.body]
     let usu = await web.autenticar(_d)
     console.log(usu)
-    if (usu.length > 0 or usu=="error")
-
-      res.send({estatus:true,mensaje:`${usu[0].nombre} ${usu[0].paterno} ${usu[0].materno}`,datos:usu[0]})
+    if (usu.estatus)
+      res.send({estatus:true,mensaje:`${usu.datos.nombre} ${usu.datos.paterno} ${usu.datos.materno}`,datos:usu.datos})
     else
       res.send({estatus:false,mensaje:"El usuario o la contraseña son incorrectos"})
 

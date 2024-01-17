@@ -2,7 +2,7 @@
 var axios = require('axios');
 
 const serviciosWeb = {
-      autenticar:(_d)=>{return axios(auten(conf(_d[0],_d[1], _d[2],_d[3],_d[4]).then(r=>{return r.data.document}).catch(e=>{return e})},
+      autenticar:(_d)=>{return axios(conf(_d[0],_d[1], _d[2],_d[3],_d[4])).then(r=>{return {estatus:true,datos:r.data.document}}).catch(e=>{return {estatus:false,mensaje:"No se pudo autenticar al ususario por alguna razón"}})},
 
 
       buscar:(_dat)=>{  },
@@ -16,7 +16,7 @@ let datosApi = function(_db,_co,_fil,_pr={_id:0}){
       return JSON.stringify({collection: _co, database: _db, dataSource: "Cluster0",filter:_fil,projection:_pr})
 }
 
-let conf = (_mh,_url,db,con,fil)=>{
+let conf = (_mh,_url,db,co,fil)=>{
     return {method: _mh, 
             url: `https://us-east-2.aws.data.mongodb-api.com/app/data-rsgsu/endpoint/data/v1/action/${_url}`,
            headers: {'Content-Type':'application/json',

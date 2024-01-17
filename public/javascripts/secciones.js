@@ -11,7 +11,7 @@ function _sec(_i){
                           {i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/newuser.jpg"}).addClass("cover-image")),
                           i2:$("<div>").addClass("title upd"),
                           i3:$("<img>").attr({"src":"/images/new2.png"}).addClass("character"),
-                          href:"Javascript:ventanaForm('mapGoogle.html',false,'p70')"
+                          href:"Javascript:ventanaForm('mapGoogle.html?24.035981732217383,-104.62414703755184 ',false,'p70')"
                           },
                           {i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/newuser.jpg"}).addClass("cover-image")),
                           i2:$("<div>").addClass("title selec       "),
