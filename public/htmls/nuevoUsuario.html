@@ -58,7 +58,7 @@
             <input type="text" class="enlinea w300" id="calle" placeholder="Calle, Avenida, Carretera, Andador, etc..." required>
             <input type="number" class="enlinea w100" id="num_ex" placeholder="Numero ext" required>
             <input type="text" class="enlinea w100" id="num_int"  placeholder="Numero int">
-            <input type="number" class="enlinea w150" id="cp"  placeholder="Código Postal" required>
+            <input type="number" class="enlinea w150" id="cp"  placeholder="Código Postal" max="35000" min="34000" required>
             <input type="text" class="enlinea" id="colonia"  placeholder="Seleccione colonia" list="listColonias">
             <datalist id="listColonias"></datalist>
         </fieldset>
@@ -68,14 +68,15 @@
         $("#cp").keyup(e=>{  
                 let cp = $("#cp").val()
                 if(cp.length==5){
+                     $("#colonia").removeAttr("list").val("")
                     $.getJSON(`/coloniasCP?cp=${cp}`, function(data) {
                         $("#colonia").css("border","2px solid green").val("")
-                        $("#listColonias").removeAttr("list").val("")
+                        $("#listColonias").html("")
                         data.forEach(e=>{ $("#listColonias").append($("<option>").val(e))})
-                        
-
-                        })       
-                 }              
+                        $("#colonia").attr("list","listColonias")
+                    })
+                 }
+                               
     })
 
     </script>

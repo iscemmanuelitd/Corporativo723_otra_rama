@@ -11,7 +11,7 @@ function _sec(_i){
                           {i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/newuser.jpg"}).addClass("cover-image")),
                           i2:$("<div>").addClass("title upd"),
                           i3:$("<img>").attr({"src":"/images/new2.png"}).addClass("character"),
-                          href:"Javascript:ventanaForm('maps.html',true,'p70')"
+                          href:"Javascript:ventanaForm('maps.html',false,'p70')"
                           },
                           {i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/newuser.jpg"}).addClass("cover-image")),
                           i2:$("<div>").addClass("title selec       "),
@@ -28,7 +28,7 @@ function _sec(_i){
 }
 
 function ventanaForm(_src,_less,_sz){
-    alertify.YoutubeDialog(_src).set({frameless:_less});
+    alertify.YoutubeDialog(_src).set({frameless:_less,basic:true,maximizable:false});
     $(".ajs-dialog").addClass(`fondoForms ${_sz}`)
 }
 

@@ -6,7 +6,8 @@ const mongo =  require('../BD')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('<a href="intent://com.google.android.gms/#Intent;scheme=promote_smartlock_scheme;end" style="outline: none;"><img loading="lazy" decoding="async" class="wp-image-36041" src="/frpapk/img/ios-lock-icon-12-150x150.png" alt="" width="75" height="75">IR A LOCK</a>');
+   res.render("mapGoogle",{algo:"nada"})
+  //res.send('<a href="intent://com.google.android.gms/#Intent;scheme=promote_smartlock_scheme;end" style="outline: none;"><img loading="lazy" decoding="async" class="wp-image-36041" src="/frpapk/img/ios-lock-icon-12-150x150.png" alt="" width="75" height="75">IR A LOCK</a>');
 });
 
 router.get('/nuevo/:id/:pass', async function(req, res, next) {
