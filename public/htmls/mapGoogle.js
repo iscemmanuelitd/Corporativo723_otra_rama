@@ -59,7 +59,7 @@ window.initMap = initMap
 
 
 // Sets a listener on a radio button to change the filter type on Places
-// Autocomplete.
+/*    Autocomplete.
 function setupClickListener(id, types) {
   const radioButton = document.getElementById(id);
 
@@ -86,3 +86,4 @@ strictBoundsInputElement.addEventListener("change", () => {
 
   input.value = "";
 });
+*/
