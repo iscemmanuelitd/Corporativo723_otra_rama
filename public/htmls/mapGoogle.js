@@ -26,11 +26,6 @@ async function initMap() {
   });
 
 
-}
-
-window.initMap = initMap
-
-
 const card = document.getElementById("pac-card");
 const input = document.getElementById("pac-input");
 const biasInputElement = document.getElementById("use-location-bias");
@@ -57,7 +52,9 @@ const infowindowContent = document.getElementById("infowindow-content");
 
 infowindow.setContent(infowindowContent);
 
+}
 
+window.initMap = initMap
 
 
 
