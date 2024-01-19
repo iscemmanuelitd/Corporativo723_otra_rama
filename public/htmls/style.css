@@ -39,7 +39,7 @@ body {
 }
 
 .pac-card {
- 
+  position: absolute;
   border: 0;
   border-top-right-radius: 10px;
   box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
@@ -47,18 +47,15 @@ body {
   overflow: hidden;
   font-family:  "Century Gothic";
   padding: 5px 5px 1px 5px;
-  height: 40px;;
+  height: 40px;
+  z-index:99;
 }
 
 #pac-container {
   position:relative;
   height: 100%;
   padding: 3px 3px 0px 3px;
-  margin:0px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 2px;
-  border-top-right-radius: 50px;
-  
+  margin: 0px;
 }
 
 
@@ -74,7 +71,7 @@ body {
 }
 
 #pac-input {
-  background: none;
+  background: rgba(255, 255, 255, 0.3);
   color:black;
   font-family: "Century Gothic";
   font-size: 15px;
@@ -84,22 +81,23 @@ body {
   width: 200px;
   height: 30px;
   border:none;
-  border-bottom: 2px solid rgb(103, 102, 102);
-
+  border-bottom: 1px solid rgb(103, 102, 102);
+  border-radius: 5px;
 }
 
 @keyframes change-width {
-   from{ width: 200px}
-   to{width: 400px}
+   from{ width: 200px; background:rgba(255, 255, 255, 0.3); border-bottom: 1px solid rgb(103, 102, 102);}
+   to{width: 400px; background:rgba(255, 255, 255, 0.95); border-bottom: 2px solid rgb(0,0,0);} 
 }
 
 
 #pac-input:hover{
-  animation: change-width 0.5s linear;
-  width: 400px;
+  animation: change-width 0.5s linear ;
+  width: 400px; background:rgba(255, 255, 255, 0.95); border-bottom: 2px solid rgb(0,0,0);
 }
 
 #pac-input:focus{
+  background:rgba(255, 255, 255, 0.95);
   width: 400px;
   box-shadow: gray;
   border-bottom: 2px solid rgba(0, 0, 0, 0.91);

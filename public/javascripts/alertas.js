@@ -52,7 +52,8 @@ valida = alertify.dialog('genericDialog',function(){
         main:function(srcForm){
             //set the videoId setting and return current instance for chaining.
             return this.set({ 
-                'srcForm': srcForm
+                'srcForm': srcForm,
+                
             });
         },
         // we only want to override two options (padding and overflow).
@@ -61,7 +62,7 @@ valida = alertify.dialog('genericDialog',function(){
                 options:{
                     //disable both padding and overflow control.
                     padding : !1,
-                    overflow: !1,
+                    overflow: !1
                 }
             };
         },
@@ -82,13 +83,14 @@ valida = alertify.dialog('genericDialog',function(){
         // dialog custom settings
         settings:{
             srcForm:undefined
+          
         },
         // listen and respond to changes in dialog settings.
         settingUpdated:function(key, oldValue, newValue){
             switch(key){
                case 'srcForm':
-                    iframe.src = "../htmls/" + newValue;
-                break;   
+                    iframe.src =  newValue;
+                    break;
             }
         },
         // listen to internal dialog events.

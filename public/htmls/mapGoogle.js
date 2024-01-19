@@ -26,74 +26,18 @@ async function initMap() {
     console.log({ location: e.latLng });
   });
 
-
-const card = document.getElementById("pac-card");
-const input = document.getElementById("pac-input");
-const biasInputElement = document.getElementById("use-location-bias");
-const strictBoundsInputElement = true
-const options = {
-  fields: ["formatted_address", "geometry", "name"],
-  strictBounds: true,
-};
-
-map.controls[google.maps.ControlPosition.TOP_LEFT].push(card);
-
-const autocomplete = new google.maps.places.Autocomplete(
-  input,
-  options
-);
-
-// Bind the map's bounds (viewport) property to the autocomplete object,
-// so that the autocomplete requests use the current map bounds for the
-// bounds option in the request.
-autocomplete.bindTo("bounds", map);
-
-const infowindow = new google.maps.InfoWindow();
-const infowindowContent = document.getElementById("infowindow-content");
-
-infowindow.setContent(infowindowContent);
-
-}
-
-window.initMap = initMap
-
-//   AIzaSyByZpNSgqlZaDWxmzKa0ybOeUNzbM1bP5g
-
-// Sets a listener on a radio button to change the filter type on Places
-  Autocomplete.
-function setupClickListener(id, types) {
-  const radioButton = document.getElementById(id);
-
-  radioButton.addEventListener("click", () => {
-    autocomplete.setTypes(types);
-    input.value = "";
-  });
-}
-
-setupClickListener("changetype-all", []);
-setupClickListener("changetype-address", ["address"]);
-setupClickListener("changetype-establishment", ["establishment"]);
-setupClickListener("changetype-geocode", ["geocode"]);
-setupClickListener("changetype-cities", ["(cities)"]);
-setupClickListener("changetype-regions", ["(regions)"]);
-biasInputElement.addEventListener("change", () => {
-  autocomplete.bindTo("bounds", map);
-  input.value = "";
-});
-strictBoundsInputElement.addEventListener("change", () => {
-  autocomplete.setOptions({
-    strictBounds: true,
-  });
-
-  input.value = "";
-});
 */
-
 
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-function initMap() {
+
+
+let map;
+let marker;
+let geocoder;
+
+async function initMap() {
   let url = window.location.href
   let coord = url.split("?")[1].split(",")
   const position = { lat: parseFloat(coord[0]), lng: parseFloat(coord[1]) }
@@ -102,8 +46,28 @@ function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
     center: position,
     zoom: 13,
-    mapTypeControl: false,
+    mapTypeControl: true,
+    mapId: "DEMO_MAP_ID"
   });
+  marker = new google.maps.Marker({
+    map: map,
+    position: position,
+    title: "Ubicacion casa del cliente",
+  });
+
+  geocoder = new google.maps.Geocoder();
+
+  geocoder.
+
+  map.addListener("click", (e) => {
+    console.log($((e)[0].latLng.lat))
+    //console.log(e)
+    coord = {lat: e.fi.x, lng:e.fi.y*-1}
+   map.setCenter(coord)
+    marker.setPosition(coord);
+    marker.setVisible(true);
+  });
+
   const card = document.getElementById("pac-card");
   const input = document.getElementById("pac-input");
   const options = {
@@ -111,7 +75,8 @@ function initMap() {
     strictBounds: false,
   };
 
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(card);
+  map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(card);
+  
 
   const autocomplete = new google.maps.places.Autocomplete(input, options);
 
@@ -119,18 +84,23 @@ function initMap() {
   // so that the autocomplete requests use the current map bounds for the
   // bounds option in the request.
   autocomplete.bindTo("bounds", map);
+  let ll = "@24.0278399,-104.6569317,12.96z"
+  let hl = "es"
+  let gl = "mx"
+  let engine = "google_maps_autocomplete"
+/*
+  https://serpapi.com/search.json?engine=google_maps_autocomplete&q=Hacienda+Santoral+109&ll=@22.7455096,-102.0083012,15.1z&type=search&api_key=8a0557b9a16966ff2298be110a98a7d0922392515188f37f2e73e4d085a56957
 
+
+  https://serpapi.com/search.json?engine=google_maps&q=Las+Adelitas+206,+Emiliano&type=address&api_key=8a0557b9a16966ff2298be110a98a7d0922392515188f37f2e73e4d085a56957
+
+*/
   const infowindow = new google.maps.InfoWindow();
   const infowindowContent = document.getElementById("infowindow-content");
 
   infowindow.setContent(infowindowContent);
 
-  const marker = new google.maps.Marker({
-    map,
-    anchorPoint: new google.maps.Point(parseFloat(coord[0]), parseFloat(coord[1])),
-  });
-
-  autocomplete.addListener("place_changed", () => {
+   autocomplete.addListener("place_changed", () => {
     infowindow.close();
     marker.setVisible(false);
 
@@ -148,7 +118,7 @@ function initMap() {
       map.fitBounds(place.geometry.viewport);
     } else {
       map.setCenter(place.geometry.location);
-      map.setZoom(17);
+      map.setZoom(15);
     }
 
     marker.setPosition(place.geometry.location);
@@ -161,47 +131,7 @@ function initMap() {
 
   // Sets a listener on a radio button to change the filter type on Places
   // Autocomplete.
-  function setupClickListener(id, types) {
-    const radioButton = document.getElementById(id);
-
-    radioButton.addEventListener("click", () => {
-      autocomplete.setTypes(types);
-      input.value = "";
-    });
-  }
-
-  setupClickListener("changetype-all", []);
-  setupClickListener("changetype-address", ["address"]);
-  setupClickListener("changetype-establishment", ["establishment"]);
-  setupClickListener("changetype-geocode", ["geocode"]);
-  setupClickListener("changetype-cities", ["(cities)"]);
-  setupClickListener("changetype-regions", ["(regions)"]);
-  biasInputElement.addEventListener("change", () => {
-    if (biasInputElement.checked) {
-      autocomplete.bindTo("bounds", map);
-    } else {
-      // User wants to turn off location bias, so three things need to happen:
-      // 1. Unbind from map
-      // 2. Reset the bounds to whole world
-      // 3. Uncheck the strict bounds checkbox UI (which also disables strict bounds)
-      autocomplete.unbind("bounds");
-      autocomplete.setBounds({ east: 180, west: -180, north: 90, south: -90 });
-      strictBoundsInputElement.checked = biasInputElement.checked;
-    }
-
-    input.value = "";
-  });
-  strictBoundsInputElement.addEventListener("change", () => {
-    autocomplete.setOptions({
-      strictBounds: strictBoundsInputElement.checked,
-    });
-    if (strictBoundsInputElement.checked) {
-      biasInputElement.checked = strictBoundsInputElement.checked;
-      autocomplete.bindTo("bounds", map);
-    }
-
-    input.value = "";
-  });
+  
 }
 
 window.initMap = initMap;
