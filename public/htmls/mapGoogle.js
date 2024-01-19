@@ -106,8 +106,6 @@ function initMap() {
   });
   const card = document.getElementById("pac-card");
   const input = document.getElementById("pac-input");
-  const biasInputElement = document.getElementById("use-location-bias");
-  const strictBoundsInputElement = document.getElementById("use-strict-bounds");
   const options = {
     fields: ["formatted_address", "geometry", "name"],
     strictBounds: false,
@@ -129,7 +127,7 @@ function initMap() {
 
   const marker = new google.maps.Marker({
     map,
-    anchorPoint: new google.maps.Point(0, -29),
+    anchorPoint: new google.maps.Point(parseFloat(coord[0]), parseFloat(coord[1])),
   });
 
   autocomplete.addListener("place_changed", () => {

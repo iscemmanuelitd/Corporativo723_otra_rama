@@ -2,7 +2,7 @@
 var axios = require('axios');
 
 const serviciosWeb = {
-      autenticar:(_d)=>{return axios(conf(_d[0],_d[1], _d[2],_d[3],_d[4])).then(r=>{return {estatus:true,datos:r.data.document}}).catch(e=>{return {estatus:false,mensaje:"No se pudo autenticar al ususario por alguna razón"}})},
+      autenticar:(_d)=>{return axios(conf(_d[0],_d[1], _d[2],_d[3],_d[4])).then(r=>{console.log(r);      return {estatus:true,datos:r.data.document}}).catch(e=>{return {estatus:false,mensaje:"No se pudo autenticar al ususario por alguna razón"}})},
 
 
       buscar:(_dat)=>{  },
