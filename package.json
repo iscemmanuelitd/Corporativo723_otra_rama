@@ -9,7 +9,6 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "@googlemaps/js-api-loader": "^1.16.2",
     "abort-controller": "^3.0.0",
     "axios": "^1.6.5",
     "cookie-parser": "~1.4.4",
