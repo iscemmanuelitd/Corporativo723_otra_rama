@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var colCPRouter = require('./routes/coloniasCP');
+var upload =require("./routes/uploadFile");
 
 
 var app = express();
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/coloniasCP',colCPRouter);
+app.use("/uploadFile",upload)
 
 
 

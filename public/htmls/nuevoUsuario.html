@@ -4,47 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="../javascripts/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <style>
-        body{
-           padding: 0;
-           margin: 0;
-        }
-        form{
-            position: absolute;
-            display:flexbox;
-            top: 1%;
-            left: 1%;
-            right: 2%;                       
-        }
-        fieldset{
-            font-family: 'Century Gothic',  sans-serif;
-            font-size: x-large;
-            border-top-right-radius: 10px;
-            padding:10px;
-            min-inline-size: 50%;
-            
-        }
-        fieldset input{
-            display: flexbox;
-            font-family: 'Century Gothic';
-            font-size: 14px;
-            border: none;
-            border-bottom: 2px solid gray;
-            width: 200px;
-        }
-        .imp{
-            font-size: 15px;
-            text-shadow: 0.5px 0.5px rgb(144, 147, 145);
-        }
-        .w100{width: 100px;}
-        .w150{width: 150px;}
-        .w200{width: 200px;}
-        .w300{width: 300px;}
-
-    </style>
+    <script src="../javascripts/jquery-3.7.1.js"></script>
+    <script src="../javascripts/uoload/file-upload.js"></script>
+  
+    <link rel="stylesheet" href="../javascripts/uoload/file-upload.css">
+  <link rel="stylesheet" href="../stylesheets/styleNew.css">
 </head>
 <body>
+    
+
     <form action="Javascript:newUsu()" method="post">
         <fieldset  class="_datPerso">Datos Personales<br>
             <input type="text" id="nombre" class="enlinea imp w200" placeholder="Nombre" required>
@@ -53,28 +21,108 @@
             <input type="date" id="fecha_nac" class="blo w150" placeholder="Fecha Nacimiento" required>
             <input type="text" id="cveElector" class="blo w150" placeholder="Clave de Elector" required>
             <input type="tel"  id="tel " class="blo w200" placeholder="999-9999999" pattern="[0-9]{3}-[0-9]{7}" required>
+            <div id="drop-area">
+                <form class="my-form">
+                  <p>Arrastrar  y Soltar archivo en esta área</p>
+                  <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+                  <label class="button" for="fileElem">Selecciona algun archivo</label>
+                </form>
+                <div id="gallery"></div>
+            </div>
+            <progress id="progress-bar" max=100 value=0></progress>
+
         </fieldset>
         <fieldset class="direccion">Dirección<br>
             <input type="text" class="enlinea w300" id="calle" placeholder="Calle, Avenida, Carretera, Andador, etc..." required>
             <input type="number" class="enlinea w100" id="num_ex" placeholder="Numero ext" required>
             <input type="text" class="enlinea w100" id="num_int"  placeholder="Numero int">
-            <input type="number" class="enlinea w150" id="cp"  placeholder="Código Postal" max="35000" min="34000" required>
-            <input type="text" class="enlinea" id="colonia"  placeholder="Seleccione colonia" list="listColonias">
-            <datalist id="listColonias"></datalist>
+            <input type="text" pattern="[3][0-9]{4}" class="enlinea w100" id="cp"  placeholder="Código Postal" max="35000" min="34000" maxlength="5" required>
+            <select class="enlinea w150" name="colonias" id="col" placeholder="Seleccione colonia"></select>
+
+            
+            
         </fieldset>
         <input type="submit" value="Crear" class="btnUsu">
     </form>
+
+
+
+
+    <div id="fileuploader">Upload</div>
+
     <script>
+       
+
+        $("#drop-area").css({"position":"absolute","top":"150px","z-index":"9999"})
+        let filesDone = 0
+        let filesToDo = 0
+        let progressBar = document.getElementById('progress-bar')
+
+         let dragdrop = document.getElementById("drop-area")
+        let arrastrar=['dragenter', 'dragover', 'dragleave', 'drop']
+        arrastrar.forEach(e=>{
+            dragdrop.addEventListener(e,preventDefaults,false)
+        })
+
+       
+        function previewFile(file) {
+            let reader = new FileReader()
+            reader.readAsDataURL(file)
+            reader.onloadend = function() {
+              let img = document.createElement('img')
+              img.src = reader.result
+              document.getElementById('gallery').appendChild(img)
+            }
+          }
+          
+        function preventDefaults(e){
+            console.log(e)
+            e.preventDefault()
+            e.stopPropagation()
+          //  $(".ajs-modal").css({"background":"rgba(255,255,255,0.5)","border":"5px dashed gray"})
+        }
+        function initializeProgress(numfiles) {
+            progressBar.value = 0
+            filesDone = 0
+            filesToDo = numfiles
+          }
+          
+          function progressDone() {
+            filesDone++
+            progressBar.value = filesDone / filesToDo * 100
+          }
+
+          function handleFiles(files) {
+            files = [...files]
+            initializeProgress(files.length) // <- Add this line
+            files.forEach(uploadFile)
+            files.forEach(previewFile)
+          }
+          
+          function uploadFile(file) {
+            let url = '/uploadFile'
+            let formData = new FormData()
+          
+            formData.append('file', file)
+          
+            fetch(url, {
+              method: 'POST',
+              body: formData
+            })
+            .then(progressDone) // <- Add `progressDone` call here
+            .catch(() => { /* Error. Inform the user */ })
+          }
+          
+      
         $("#cp").keyup(e=>{  
-                let cp = $("#cp").val()
-                if(cp.length==5){
-                     $("#colonia").removeAttr("list").val("")
+                let cp = parseInt($("#cp").val())
+                if(cp >= 34000){                    
                     $.getJSON(`/coloniasCP?cp=${cp}`, function(data) {
-                        $("#colonia").css("border","2px solid green").val("")
-                        $("#listColonias").html("")
-                        data.forEach(e=>{ $("#listColonias").append($("<option>").val(e))})
-                        $("#colonia").attr("list","listColonias")
+                        $("#col").html("")                        
+                        data.forEach(e=>{ $("#col").append($("<option>").val(e).html(e))})                
                     })
+                 }else{
+                    $("#col").html("")                    
                  }
                                
     })

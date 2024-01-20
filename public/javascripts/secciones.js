@@ -28,10 +28,41 @@ function _sec(_i){
     return $divTot;
 }
 
+$(document).ready(function() {
+   // document.write("<script src='./javascripts/forms/nuevoCliente.js' ></script>")
+});
+
+
 function ventanaForm(_src,_less,_sz,_tit=""){
+   let  $pre = $("<div>").css("width","90%").html($prin)
+    alertify.confirm($pre.html(), function(){
+            alertify.success('Accepted');
+        },function(){
+            alertify.error('Declined');
+        }).set({labels:{ok:'Accept', cancel: 'Decline'}, padding: true,resizable:true});
+
+        $(".ajs-dialog").css({"max-width":"75%","height":"50%"})
+
+        $("#cp").keyup(e=>{  
+            let cp = parseInt($("#cp").val())
+            if(cp >= 34000){                    
+                $.getJSON(`/coloniasCP?cp=${cp}`, function(data) {
+                    $("#col").html("")                        
+                    data.forEach(e=>{ $("#col").append($("<option>").val(e).html(e))})                
+                })
+             }else{
+                $("#col").html("")                    
+             }     
+        })
+
+       console.log( $("#fileuploader").uploadFile({
+            url:"/uploadFile",
+            fileName:"misFiles"
+        }))
+/*
     alertify.YoutubeDialog(_src).set({title:_tit,frameless:_less,basic:true,maximizable:false});
     $(".ajs-dialog").removeClass("p45 p70 p90").addClass(`fondoForms ${_sz}`)
-    $(".ajs-header").css("opacity","1")
+    $(".ajs-header").css("opacity","1")*/
 }
 
 $(function () {
