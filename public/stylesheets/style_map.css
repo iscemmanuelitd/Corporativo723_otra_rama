@@ -4,8 +4,13 @@
  */
  #map {
   height: 100%;
+  position:static !important;
+  overflow: hidden !important;
 }
 
+.ajs-content{
+  overflow: hidden !important;
+}
 :root{
   --main-bg-color: rgba(255,255,255,0.1);
 }

@@ -6,7 +6,7 @@ function _sec(_i){
         case 1:  let opc=[{i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/newuser.jpg"}).addClass("cover-image")),
                           i2:$("<div>").addClass("title new"),
                           i3:$("<img>").attr({"src":"/images/new4.png"}).addClass("character"),
-                          $_dat:[$nuevoCli,"<h2>Nuevo Cliente</h2>","80%","70%"]
+                          $_dat:[$nuevoCli,"<h2>Nuevo Cliente</h2>","65%","60%"]
                           },
                           {i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/newuser.jpg"}).addClass("cover-image")),
                           i2:$("<div>").addClass("title upd"),
@@ -33,15 +33,17 @@ $(document).ready(function() {
 });
 
 
-function ventanaForm(_dat){
+ function ventanaForm(_dat){
     let  $pre = $("<div>").html(_dat[0])
     alertify.dialogGuardar($pre.html()).set({title:_dat[1]})
 
-    window.initMap
+    $("body").append($("<script>").attr("src","https://maps.googleapis.com/maps/api/js?key=AIzaSyDi2xjZpxYm9FK2BqWWxwN1CBEcckvUCho&libraries=places&callback=initMap&v=weekly"))
+    
+   // window.initMap
     //initMap({lat:22.025,lng:-102.365});
 
 
-        $(".ajs-dialog").css({"max-width":_dat[2],"height":_dat[3]})
+    //$(".ajs-dialog").css({"max-width":_dat[2],"height":_dat[3]})
 
 
 

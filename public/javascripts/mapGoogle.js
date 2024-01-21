@@ -73,7 +73,11 @@ async function initMap(){
     strictBounds: false,
   };
 
-  map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(card);
+  let tipo = document.getElementsByClassName(".gm-style-mtc-bbw");
+  console.log(tipo)
+  
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(card);
+  //map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(tipo);
   
 
   const autocomplete = new google.maps.places.Autocomplete(input, options);
@@ -127,9 +131,7 @@ async function initMap(){
     infowindow.open(map, marker);
   });
 
-  // Sets a listener on a radio button to change the filter type on Places
-  // Autocomplete.
-  
+
 }
 
 window.initMap = initMap

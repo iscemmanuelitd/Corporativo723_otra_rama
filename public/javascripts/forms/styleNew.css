@@ -13,20 +13,43 @@
 
 .ajs-header h2{
   margin:0;
+}
+.ventanaMain{
+  width:95%
+}
 
+@media only screen and (max-width: 500px) {
+  .alertify  .ajs-dialog {
+    width: 90%;
+    height: 80%;
 }
-#nuevoCliente{
-  width: 90%;
+}
+@media only screen and (min-width: 501px) {
+  .alertify  .ajs-dialog{
+    min-width: 70%;
+    min-height: 50%;
+  }
+}
 
+
+
+.mapModal{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background: rgba(0,0,0,0.3);
 }
-fieldset input{
-    display: inline-flex;
-    font-family: 'Century Gothic';
-    font-size: 14px;
-    border: none;
-    border-bottom: 2px solid gray;
-   
+.ubi-map{
+  position:relative;
+  width:50%;
+  height: 50%;
 }
+.ocultar{
+  display: none;
+}
+
 .imp{
     font-size: 15px;
     text-shadow: 0.5px 0.5px rgb(144, 147, 145);
@@ -46,7 +69,12 @@ fieldset input{
 }
 
 .enlinea{
-  margin: 5px 25px 5px 1px;
+    margin: 5px 25px 5px 1px;
+    display: inline-flex;
+    font-family: 'Century Gothic';
+    font-size: 14px;
+    border: none;
+    border-bottom: 2px solid gray;
 }
 
 

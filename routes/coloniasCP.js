@@ -9,7 +9,7 @@ router.get("/",(req,res,next)=>{
 xxx = {
 "colonias": {
   "34000": [
-      "Victoria de Durango Centro",
+      "Zona Centro",
       "Dionisio Gallardo",
       "Luis Gómez Zepeda",
       "Rinconada Mascareñas",

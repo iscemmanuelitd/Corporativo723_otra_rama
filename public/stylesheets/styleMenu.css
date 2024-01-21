@@ -1,24 +1,4 @@
-html * {
-    font-family: 'Segoe UI', Arial, Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-   
-}
 
-
-
-h1 {
-    padding: 20px 0;
-    border-bottom: 1px solid #ebebeb
-}
-
-
-h2 {
-    margin: 200px 0 10px 0;
-}
-
-h2:first-child {
-    margin-top: 40px;
-}
 
 .fondo {
     
