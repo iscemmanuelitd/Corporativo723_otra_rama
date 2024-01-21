@@ -1,7 +1,6 @@
 
 #nCli{
     position: relative;
-    display:flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: stretch;
@@ -11,19 +10,16 @@
     left: 1%;
     right: 2%;                       
 }
-#nCli fieldset{
-    font-family: 'Century Gothic',  sans-serif;
-    font-size: x-large;
-    border-top-right-radius: 10px;
-    padding:10px;
-    min-inline-size: 50%;
-    
+
+.ajs-header h2{
+  margin:0;
+
 }
 #nuevoCliente{
   width: 90%;
 
 }
-._datPerso > input,.direccion > .enlinea{
+fieldset input{
     display: inline-flex;
     font-family: 'Century Gothic';
     font-size: 14px;

@@ -6,22 +6,22 @@ function _sec(_i){
         case 1:  let opc=[{i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/newuser.jpg"}).addClass("cover-image")),
                           i2:$("<div>").addClass("title new"),
                           i3:$("<img>").attr({"src":"/images/new4.png"}).addClass("character"),
-                          href:"Javascript:ventanaForm('../htmls/nuevoUsuario.html',false,'p90')"
+                          $_dat:[$nuevoCli,"<h2>Nuevo Cliente</h2>","80%","70%"]
                           },
                           {i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/newuser.jpg"}).addClass("cover-image")),
                           i2:$("<div>").addClass("title upd"),
                           i3:$("<img>").attr({"src":"/images/new2.png"}).addClass("character"),
-                          href:"Javascript:ventanaForm('../htmls/mapGoogle.html?24.035981732217383,-104.62414703755184 ',false,'p70','Ubicar domicilio cliente')"
+                          $_dat:[$mapa,"<h2>Ubicar domicilio</h2>","50%","50%"]
                           },
                           {i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/newuser.jpg"}).addClass("cover-image")),
                           i2:$("<div>").addClass("title selec       "),
                           i3:$("<img>").attr({"src":"/images/new1.png"}).addClass("character"),
-                          href:"Javascript:ventanaForm('https://www.google.com/maps/embed/v1/place?q=206+las+adelitas,+Durango,+Mexico&key=AIzaSyDi2xjZpxYm9FK2BqWWxwN1CBEcckvUCho',true,'p90')"  
+                          $_dat:["Proximamente"]
                         
                         }
                         ];
                 for(let i=0;i<opc.length;i++)
-                    $divTot.append($("<a>").attr({"href":opc[i].href}).html($("<div>").addClass("card").html(opc[i].i1).append(opc[i].i2).append(opc[i].i3)))
+                    $divTot.append($("<a>").html($("<div>").addClass("card").html(opc[i].i1).append(opc[i].i2).append(opc[i].i3)).click(function(){ventanaForm(opc[i].$_dat)}))
                 break;
         default: break;       
     } 
@@ -33,37 +33,32 @@ $(document).ready(function() {
 });
 
 
-function ventanaForm(_src,_less,_sz,_tit=""){
-   let  $pre = $("<div>").css("width","90%").html($prin)
-    alertify.confirm($pre.html(), function(){
-            alertify.success('Accepted');
-        },function(){
-            alertify.error('Declined');
-        }).set({labels:{ok:'Accept', cancel: 'Decline'}, padding: true,resizable:true});
+function ventanaForm(_dat){
+    let  $pre = $("<div>").html(_dat[0])
+    alertify.dialogGuardar($pre.html()).set({title:_dat[1]})
 
-        $(".ajs-dialog").css({"max-width":"75%","height":"50%"})
+    window.initMap
+    //initMap({lat:22.025,lng:-102.365});
+
+
+        $(".ajs-dialog").css({"max-width":_dat[2],"height":_dat[3]})
+
+
+
+
 
         $("#cp").keyup(e=>{  
             let cp = parseInt($("#cp").val())
-            if(cp >= 34000){                    
-                $.getJSON(`/coloniasCP?cp=${cp}`, function(data) {
-                    $("#col").html("")                        
-                    data.forEach(e=>{ $("#col").append($("<option>").val(e).html(e))})                
-                })
-             }else{
-                $("#col").html("")                    
-             }     
+            if(cp >= 34000)  $.getJSON(`/coloniasCP?cp=${cp}`, function(data) {$("#col").html("");data.forEach(e=>{ $("#col").append($("<option>").val(e).html(e))})});
+            else $("#col").html("")                     
         })
 
-       console.log( $("#fileuploader").uploadFile({
-            url:"/uploadFile",
-            fileName:"misFiles"
-        }))
-/*
-    alertify.YoutubeDialog(_src).set({title:_tit,frameless:_less,basic:true,maximizable:false});
-    $(".ajs-dialog").removeClass("p45 p70 p90").addClass(`fondoForms ${_sz}`)
-    $(".ajs-header").css("opacity","1")*/
+        $("#fileuploader").uploadFile({url:"/uploadFile",fileName:"misFiles"})
+
 }
+
+
+
 
 $(function () {
     $('.ah-tab-wrapper').horizontalmenu({

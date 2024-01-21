@@ -33,14 +33,12 @@ async function initMap() {
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
 
-let map;
+
 let marker;
 let geocoder;
 
-async function initMap() {
-  let url = window.location.href
-  let coord = url.split("?")[1].split(",")
-  const position = { lat: parseFloat(coord[0]), lng: parseFloat(coord[1]) }
+async function initMap(){
+  const position = {lat:22.025,lng:-102.365}
   console.log(position)
 
   const map = new google.maps.Map(document.getElementById("map"), {
@@ -57,7 +55,7 @@ async function initMap() {
 
   geocoder = new google.maps.Geocoder();
 
-  geocoder.
+ 
 
   map.addListener("click", (e) => {
     console.log($((e)[0].latLng.lat))
@@ -134,4 +132,4 @@ async function initMap() {
   
 }
 
-window.initMap = initMap;
+window.initMap = initMap
