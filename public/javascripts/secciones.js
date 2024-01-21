@@ -6,31 +6,59 @@ function _sec(_i){
         case 1:  let opc=[{i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/newuser.jpg"}).addClass("cover-image")),
                           i2:$("<div>").addClass("title new"),
                           i3:$("<img>").attr({"src":"/images/new4.png"}).addClass("character"),
-                          href:"Javascript:ventanaForm('nuevoUsuario.html',false,'p70')"
+                          $_dat:[$nuevoCli,"<h2>Nuevo Cliente</h2>","80%","70%"]
                           },
                           {i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/newuser.jpg"}).addClass("cover-image")),
                           i2:$("<div>").addClass("title upd"),
                           i3:$("<img>").attr({"src":"/images/new2.png"}).addClass("character"),
-                          href:"Javascript:ventanaForm('maps.html',true,'p70')"
+                          $_dat:[$mapa,"<h2>Ubicar domicilio</h2>","50%","50%"]
                           },
                           {i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/newuser.jpg"}).addClass("cover-image")),
                           i2:$("<div>").addClass("title selec       "),
-                          i3:$("<img>").attr({"src":"/images/new1.png"}).addClass("character")
-                          }
+                          i3:$("<img>").attr({"src":"/images/new1.png"}).addClass("character"),
+                          $_dat:["Proximamente"]
+                        
+                        }
                         ];
                 for(let i=0;i<opc.length;i++)
-                    $divTot.append($("<a>").attr({"href":opc[i].href}).html($("<div>").addClass("card").html(opc[i].i1).append(opc[i].i2).append(opc[i].i3)))
+                    $divTot.append($("<a>").html($("<div>").addClass("card").html(opc[i].i1).append(opc[i].i2).append(opc[i].i3)).click(function(){ventanaForm(opc[i].$_dat)}))
                 break;
         default: break;       
     } 
-    console.log($divTot);
     return $divTot;
 }
 
-function ventanaForm(_src,_less,_sz){
-    alertify.YoutubeDialog(_src).set({frameless:_less});
-    $(".ajs-dialog").addClass(`fondoForms ${_sz}`)
+$(document).ready(function() {
+   // document.write("<script src='./javascripts/forms/nuevoCliente.js' ></script>")
+});
+
+
+function ventanaForm(_dat){
+    let  $pre = $("<div>").html(_dat[0])
+    alertify.dialogGuardar($pre.html()).set({title:_dat[1]})
+
+    window.initMap
+    //initMap({lat:22.025,lng:-102.365});
+
+
+        $(".ajs-dialog").css({"max-width":_dat[2],"height":_dat[3]})
+
+
+
+
+
+        $("#cp").keyup(e=>{  
+            let cp = parseInt($("#cp").val())
+            if(cp >= 34000)  $.getJSON(`/coloniasCP?cp=${cp}`, function(data) {$("#col").html("");data.forEach(e=>{ $("#col").append($("<option>").val(e).html(e))})});
+            else $("#col").html("")                     
+        })
+
+        $("#fileuploader").uploadFile({url:"/uploadFile",fileName:"misFiles"})
+
 }
+
+
+
 
 $(function () {
     $('.ah-tab-wrapper').horizontalmenu({

@@ -3,24 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-/*
-const mongo =  require("./BD")
-mongo.conectar("db723")
-
-var mongoClient = require("mongodb").MongoClient;
-mongoClient.connect("mongodb://corporativo723-server:U0kHCWZUVzzRsMFdtmUTY6IH8RsrsC1G12CE6VZ59W8eO1BbMgdpZlXeQnWTLdzE7HHsp79Ho6JuACDbUNC0BQ%3D%3D@corporativo723-server.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&maxIdleTimeMS=120000&appName=@corporativo723-server@", function (err, client) {
-  console.log(client)
-  client.close();
-});
-*/
-
-
-
-
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var colCPRouter = require('./routes/coloniasCP');
+var upload =require("./routes/uploadFile");
+
 
 var app = express();
 
@@ -36,9 +24,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/coloniasCP', colCPRouter);
+app.use('/coloniasCP',colCPRouter);
+app.use("/uploadFile",upload)
 
-// catch 404 and forward to error handler
+
+
+
+// caDFSS
 app.use(function(req, res, next) {
   next(createError(404));
 });

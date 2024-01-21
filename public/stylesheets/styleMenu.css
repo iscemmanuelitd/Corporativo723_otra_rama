@@ -75,7 +75,15 @@ fieldset{
     background-image: url("../images/logo_trans.png");
     background-repeat: no-repeat;
     background-position: center;
+    position:relative;
 }
-.p45{background-size: 45%;}
-.p70{background-size: 70%;}
-.p90{background-size: 90%;}
+.p45{background-size:45%; max-width: 450px;}
+.p70{
+    background-size: 70%;
+    min-width: 50% !important;
+    max-width: 80% !important;
+    min-height: 50% !important;
+    max-height: 75% !important;
+    
+}
+.p90{background-size: 90%; max-width: 950px;}
