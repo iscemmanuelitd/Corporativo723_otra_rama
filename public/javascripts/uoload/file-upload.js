@@ -218,7 +218,7 @@
         this.createProgress = function (filename,filepath,filesize) {
             var pd = new createProgressDiv(this, s);
             pd.progressDiv.show();
-            pd.progressbar.width('100%');
+            pd.progressbar.width('100px');
 
             var fileNameStr = "";
             if(s.showFileCounter)

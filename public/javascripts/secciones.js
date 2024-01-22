@@ -52,13 +52,11 @@ function onApiLoad(_url) {
         })
 
         $("#fileuploader").uploadFile({url:"/uploadFile",fileName:"misFiles",allowedTypes:"png,jpg,jpeg,bmp,zip",showPreview:true,previewHeight:"50px",previewWidth:"auto",autoSubmit:true,showAbort:true,showDelete:false,statusBarWidth:100,dragdropWidth:800})
-
-        
         $(".ajax-upload-dragdrop span").css("color","rgba(0,0,0,0.7)")
-        //$(".ajax-upload-dragdrop").addClass("crede").css("display","auto")
-       //$(".ajax-file-upload").html($(".ajax-file-upload").html().replace("Upload","Subir"))
-        
         $(".ajax-upload-dragdrop").append($(".ajax-file-upload-container")).css("display","inline-block")
+
+
+        $("#upload-evidencias").uploadFile({url:"/uploadFile",fileName:"misFiles",allowedTypes:"png,jpg,jpeg,bmp,mp4,avi,flv",showPreview:true,previewHeight:"50px",previewWidth:"auto",autoSubmit:true,showAbort:true,showDelete:false,statusBarWidth:100,uploadButtonClass:"botonSubir",dragDropContainerClass:"dragDropEvi"})
        
 
 }
