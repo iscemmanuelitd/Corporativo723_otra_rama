@@ -69,14 +69,14 @@
             dragDropHoverClass: "state-hover",
             errorClass: "ajax-file-upload-error",
             uploadButtonClass: "ajax-file-upload",
-            dragDropStr: "<span><b>Drag &amp; Drop Files</b></span>",
-            uploadStr:"Upload",
-            abortStr: "Abort",
-            cancelStr: "Cancel",
-            deleteStr: "Delete",
-            doneStr: "Done",
+            dragDropStr: "<span><b>Arrastra y Suelta Archivo</b></span>",
+            uploadStr:"Subir",
+            abortStr: "Abortar",
+            cancelStr: "Cancelar",
+            deleteStr: "Eliminar",
+            doneStr: "Listo",
             multiDragErrorStr: "Multiple File Drag &amp; Drop is not allowed.",
-            extErrorStr: "is not allowed. Allowed extensions: ",
+            extErrorStr: " es un archivo no permitido. Use: ",
             duplicateErrorStr: "is not allowed. File already exists.",
             sizeErrorStr: "is not allowed. Allowed Max size: ",
             uploadErrorStr: "Upload is not allowed",
@@ -443,7 +443,10 @@
                 obj.selectedFiles++;
                 obj.existingFileNames.push(files[i].name);
                 // Make object immutable
-                var ts = $.extend({}, s);
+              ///  var ts = $.extend({}, s);
+                var ts = $.extend($(".ajax-upload-dragdrop"), s);
+            
+
                 var fd = new FormData();
                 var fileName = s.fileName.replace("[]", "");
                 fd.append(fileName, files[i]);

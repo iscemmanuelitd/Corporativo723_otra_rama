@@ -33,32 +33,35 @@ $(document).ready(function() {
 });
 
 
+function onApiLoad(_url) {
+    var embed = document.createElement('script');
+    embed.src = _url
+    document.body.appendChild(embed);
+  }
+
+
  function ventanaForm(_dat){
     let  $pre = $("<div>").html(_dat[0])
     alertify.dialogGuardar($pre.html()).set({title:_dat[1]})
-
-    $("body").append($("<script>").attr("src","https://maps.googleapis.com/maps/api/js?key=AIzaSyDi2xjZpxYm9FK2BqWWxwN1CBEcckvUCho&libraries=places&callback=initMap&v=weekly"))
+    onApiLoad("https://maps.googleapis.com/maps/api/js?key=AIzaSyDi2xjZpxYm9FK2BqWWxwN1CBEcckvUCho&libraries=places,search&callback=initMap&v=weekly")
     
-   // window.initMap
-    //initMap({lat:22.025,lng:-102.365});
-
-
-    //$(".ajs-dialog").css({"max-width":_dat[2],"height":_dat[3]})
-
-
-
-
-
         $("#cp").keyup(e=>{  
             let cp = parseInt($("#cp").val())
             if(cp >= 34000)  $.getJSON(`/coloniasCP?cp=${cp}`, function(data) {$("#col").html("");data.forEach(e=>{ $("#col").append($("<option>").val(e).html(e))})});
-            else $("#col").html("")                     
+            else $("#col").html("")             
         })
 
-        $("#fileuploader").uploadFile({url:"/uploadFile",fileName:"misFiles"})
+        $("#fileuploader").uploadFile({url:"/uploadFile",fileName:"misFiles",allowedTypes:"png,jpg,jpeg,bmp,zip",showPreview:true,previewHeight:"50px",previewWidth:"auto",autoSubmit:true,showAbort:true,showDelete:false,statusBarWidth:100,dragdropWidth:800})
+
+        
+        $(".ajax-upload-dragdrop span").css("color","rgba(0,0,0,0.7)")
+        //$(".ajax-upload-dragdrop").addClass("crede").css("display","auto")
+       //$(".ajax-file-upload").html($(".ajax-file-upload").html().replace("Upload","Subir"))
+        
+        $(".ajax-upload-dragdrop").append($(".ajax-file-upload-container")).css("display","inline-block")
+       
 
 }
-
 
 
 
