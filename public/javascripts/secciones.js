@@ -1,3 +1,6 @@
+var d=null
+
+
 function _sec(_i){
     let $divTot = $("<div>").css("display","flex");
     console.log("funcion de mierda "+ _i)
@@ -29,7 +32,8 @@ function _sec(_i){
 }
 
 $(document).ready(function() {
-   // document.write("<script src='./javascripts/forms/nuevoCliente.js' ></script>")
+    
+    
 });
 
 
@@ -41,8 +45,8 @@ function onApiLoad(_url) {
 
 
  function ventanaForm(_dat){
-    let  $pre = $("<div>").html(_dat[0])
-    alertify.dialogGuardar($pre.html()).set({title:_dat[1]})
+    let  $pre = $("<div>").html(_dat[0]).addClass("fondoForms")
+    alertify.dialogGuardar($pre.html()).set({title:_dat[1],'resizable':true}).resizeTo('80%','80%')
     onApiLoad("https://maps.googleapis.com/maps/api/js?key=AIzaSyDi2xjZpxYm9FK2BqWWxwN1CBEcckvUCho&libraries=places,search&callback=initMap&v=weekly")
     
         $("#cp").keyup(e=>{  
@@ -51,9 +55,9 @@ function onApiLoad(_url) {
             else $("#col").html("")             
         })
 
-        $("#fileuploader").uploadFile({url:"/uploadFile",fileName:"misFiles",allowedTypes:"png,jpg,jpeg,bmp,zip",showPreview:true,previewHeight:"50px",previewWidth:"auto",autoSubmit:true,showAbort:true,showDelete:false,statusBarWidth:100,dragdropWidth:800})
+       d = $("#fileuploader").uploadFile({url:"/uploadFile",fileName:"misFiles",allowedTypes:"png,jpg,jpeg,bmp,zip",showPreview:true,previewHeight:"50px",previewWidth:"auto",autoSubmit:false,showAbort:true,showCancel:true,statusBarWidth:100,dragdropWidth:800,cliente:"0001",onSubmit: function(obj,xhr){  console.log(obj,xhr)  }})
         $(".ajax-upload-dragdrop span").css("color","rgba(0,0,0,0.7)")
-        $(".ajax-upload-dragdrop").append($(".ajax-file-upload-container")).css("display","inline-block")
+        $(".ajax-upload-dragdrop").append($(".ajax-file-upload-container")).css("display","inline-block").append(_div("salir","salir","X").click(()=>{ d.startUpload()  }) )
 
 
         $("#upload-evidencias").uploadFile({url:"/uploadFile",fileName:"misFiles",allowedTypes:"png,jpg,jpeg,bmp,mp4,avi,flv",showPreview:true,previewHeight:"50px",previewWidth:"auto",autoSubmit:true,showAbort:true,showDelete:false,statusBarWidth:100,uploadButtonClass:"botonSubir",dragDropContainerClass:"dragDropEvi"})
@@ -71,12 +75,19 @@ $(function () {
             $('.ah-tab-content-wrapper .ah-tab-content').removeAttr('data-ah-tab-active');
             $('.ah-tab-content-wrapper .ah-tab-content:eq(' + _idx + ')').attr('data-ah-tab-active', 'true')
             .html(_sec(_idx))
+
+            console.log(d)
+            console.log(d.getUrlParameter("xx"))
+
             return false; //if this finction return true then will be executed http request
         }
     });
+    
+    $(".ajs-footer").click(function(){
+        console.log("mamalo")
+        console.log(d)
+       console.log(d.getUrlParameter("xx"))
+    })
 });
-
-
-
 
 

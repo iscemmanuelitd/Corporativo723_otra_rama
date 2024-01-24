@@ -15,7 +15,7 @@
     .append($("<select>").attr({"name":"colonias","id":"col"}).addClass("enlinea w150"))
     //.append(_div("mapModal","mapModal",_div("ubi-map","ubi-map",$("<iframe>").attr({"src":"https://www.google.com.mx/maps/@21.8787097,-102.2836594,9311m/data=!3m1!1e3?entry=ttu","WIDTH":"100%","HEIGTH":"100%"}))))
     $fs3.append(_div("upload-evidencias","upload","Subir Evidencias"))
-    $form1.append($fs1).append($fs2).append($fs3).append(_inp("submit","guardar","btnGuardar","",true,"Enviar"))
+    $form1.append($fs1).append($fs2).append($fs3).append(_inp("button","guardar","btnGuardar","",true,"Enviar"))
     $nuevoCli.html($form1)
 
 
@@ -45,6 +45,12 @@ function _selec(id,clase,opc,sel){
     opc.forEach((e,i,a) => {  $s.append($("<option>").val(i+1).html(e).attr(i+1==sel ? {"selected":true}:{"selected":false})) })
     console.log($s)
     return $s
+}
+
+
+
+function valida(){
+    $("#fileuploader").getUrlParameter("x")
 }
 
 /*

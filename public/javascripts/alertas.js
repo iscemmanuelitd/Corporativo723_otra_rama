@@ -32,7 +32,7 @@ valida = alertify.dialog('genericDialog',function(){
         },
         callback:function(closeEvent){
             if(closeEvent.index==0)
-                onAutenticar()
+                {$("#modal").addClass("ocultar"); onAutenticar();}
             else
                location.reload()
         },

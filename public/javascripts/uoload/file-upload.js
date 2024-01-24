@@ -94,6 +94,7 @@
             headers: {}
         }, options);
 
+        console.log(s.cliente)
         this.fileCounter = 1;
         this.selectedFiles = 0;
         var formGroup = "ajax-file-upload-" + (new Date().getTime());
@@ -921,6 +922,8 @@ var getUrlParameter = function getUrlParameter(sParam) {
         sURLVariables = sPageURL.split('&'),
         sParameterName,
         i;
+
+console.log(sURLVariables)
 
     for (i = 0; i < sURLVariables.length; i++) {
         sParameterName = sURLVariables[i].split('=');

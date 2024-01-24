@@ -57,6 +57,7 @@ fieldset{
     background-position: center;
     position:relative;
 }
+.p35{background-size:35%; min-width: 450px !important;  min-height: 200px;}
 .p45{background-size:45%; max-width: 450px;}
 .p70{
     background-size: 70%;
@@ -66,4 +67,4 @@ fieldset{
     max-height: 75% !important;
     
 }
-.p90{background-size: 90%; max-width: 950px;}
+.p90{background-size: 80%; max-width: 950px;}
